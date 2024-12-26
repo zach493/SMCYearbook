@@ -475,8 +475,8 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
   },
-  adminCard5: {
-    marginLeft: 70,//remove if you want it to be grid
+  adminCard5: {//service
+    marginLeft: 75,//remove if you want it to be grid
     width: '60%',//make it 30 if suggested grid
     alignItems: 'center',
     padding: 15,
@@ -493,7 +493,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   adminCard4: {
-    marginLeft: 70,
+    marginLeft: 75,
     width: '60%',//make it 30 if suggested grid
     alignItems: 'center',
     padding: 15,
@@ -505,7 +505,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   adminCard3: {
-    marginLeft: 70,
+    marginLeft: 75,
     width: '60%',//make it 30 if suggested grid
     alignItems: 'center',
     padding: 15,
@@ -517,7 +517,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   adminCard2: {
-    marginLeft: 70,//remove if you want it to be grid
+    marginLeft: 75,//remove if you want it to be grid
     width: '60%',//make it 30 if suggested grid
     alignItems: 'center',
     padding: 15,
@@ -530,7 +530,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   adminCard1: {
-    marginLeft: 70,//remove if you want it to be grid
+    marginLeft: 75,//remove if you want it to be grid
     width: '60%',//make it 30 if suggested grid
     alignItems: 'center',
     padding: 15,
@@ -542,7 +542,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   adminCard: {
-    marginLeft: 70,//remove if you want it to be grid
+    marginLeft: 75,//remove if you want it to be grid
     width: '60%',//make it 30 if suggested grid
     alignItems: 'center',
     padding: 15,

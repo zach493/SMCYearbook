@@ -46,7 +46,7 @@ const College = () => {
             {alumniData.map((alumni, index) => (
               <View key={index} style={styles.profileCard}>
                 <Image
-                  source={{ uri: alumni.img_url }} // Updated to use img_url
+                  source={{ uri: alumni.img_url }} 
                   style={styles.profileImage}
                 />
                 <Text style={styles.profileName}>
