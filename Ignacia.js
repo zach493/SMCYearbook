@@ -89,8 +89,8 @@ const styles = StyleSheet.create({
     zIndex: 2,
   },
   contentContainer: {
-    width: 314,
-    marginLeft: 24,
+    width: 318,
+    marginLeft: 35.3,
     marginTop: -20,
     padding: 15,
     backgroundColor: '#fff',

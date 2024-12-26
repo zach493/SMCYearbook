@@ -8,7 +8,7 @@ const Header = () => {
     home: require('./images/home.png'),
     yearbook: require('./images/yearbook.png'),
     user: require('./images/user1.png'),
-    logout: require('./images/log-out.png'),
+    logout: require('./images/out.png'),
   });
 
   const handleIconChange = (iconName) => {
@@ -25,7 +25,7 @@ const Header = () => {
         newIcons.user = require('./images/user-hover.png');
         break;
       case 'logout':
-        newIcons.logout = require('./images/log-out-hover.png');
+        newIcons.logout = require('./images/out.png');
         break;
       default:
         break;

@@ -53,6 +53,7 @@ const Alma = () => {
   );
 };
 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -93,18 +94,20 @@ const styles = StyleSheet.create({
     zIndex: 2,
   },
   contentContainer: {
-    width: 312,
-    marginLeft: 24,
+    width: 318,
+    marginLeft: 35.3,
     marginTop: -30,
     padding: 15,
     backgroundColor: '#fff',
     elevation: 3,
   },
   sectionText: {
-    color: '#000',
-    fontSize: 14,
-    lineHeight: 22,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
   },
+  
 });
 
 export default Alma;

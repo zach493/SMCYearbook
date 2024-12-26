@@ -83,49 +83,52 @@ const styles = StyleSheet.create({
 
   panelImage1: {
     marginTop: 23,
-    marginLeft: -235,
-    width: '230%',
-    height: 100,
+    marginLeft: -275,
+    width: '240%',
+    height: 110,
     resizeMode: 'contain',
   },
 
   panelImage2: {
     marginTop: 10,
-    width: '100%',
-    height: 100,
+    width: '240%',
+    height: 110,
+    marginLeft: -275,
+
     resizeMode: 'contain',  
   },
 
   panelImage3: {
-    marginLeft: 20,
+    marginLeft: -274,
     marginTop: 10,
-    width: '89.5%',
-    height: 120,
+    width: '240%',
+    height: 128,
     resizeMode: 'contain',
   },
 
   panelImage4: {
-    marginLeft: 19,
-    marginTop: -5,
-    width: '89%',
-    height: 101.5,
+    marginLeft: -225,
+    marginTop: -10,
+    width: '215%',
+    height: 109,
     resizeMode: 'contain',
   },
 
   panelImage5: {
-    marginLeft: 23,
+    marginLeft: 28,    
     marginTop: 10,
-    width: '87%',
+    width: '85.8%',
     height: 101.5,
     resizeMode: 'contain',
   },   
 
   panelImage6: {
+    marginLeft: 24,    
     marginTop: 20,
-    width: '100%',
-    height: 100,
+    width: '87.4%',
+    height: 110,
     resizeMode: 'contain',
-    marginBottom: 10,
+    marginBottom: 20,
   },
 
 });

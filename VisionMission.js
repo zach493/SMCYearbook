@@ -90,9 +90,9 @@ const styles = StyleSheet.create({
   },
   headerImage: {
     marginTop: 10,
-    marginLeft: -235,
-    width: '230%',
-    height: 100,
+    marginLeft: -234,
+    width: '219%',
+    height: 107.4,
     resizeMode: 'contain',
     position: 'absolute',
     top: 80,
