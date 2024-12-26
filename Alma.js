@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, Image, ScrollView, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import Header from './Header';
+
+const { width, height } = Dimensions.get('window');
 
 const Alma = () => {
   const [activeSection, setActiveSection] = useState('almaMater');
@@ -80,12 +82,12 @@ const styles = StyleSheet.create({
   topHeader: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    paddingVertical: 10,
+    paddingVertical: height * 0.02, 
   },
   headerText: {
-    marginTop: 20,
+    marginTop: height * 0.02, 
     color: '#fff',
-    fontSize: 20,
+    fontSize: width * 0.05, 
     fontWeight: 'bold',
   },
   activeText: {
@@ -101,25 +103,25 @@ const styles = StyleSheet.create({
   lineLeft: { left: 0 },
   lineRight: { right: 0 },
   section: {
-    marginBottom: 20,
+    marginBottom: height * 0.02, 
   },
   headerImage: {
-    marginTop: -60,
-    marginLeft: -233,
-    width: '219%',
-    height: 107.4,
+    marginTop: -height * 0.07, 
+    marginLeft: -width * -0.04, 
+    width: width * 0.92, 
+    height: height * 0.15, 
     resizeMode: 'contain',
     position: 'absolute',
-    top: 80,
+    top: height * 0.1, 
     zIndex: 2,
   },
   contentContainer: {
-    height: 3020,
-    marginTop: 120,
-    marginLeft: 30,
-    marginRight: 30,
+    height: height * 0.75, 
+    marginTop: height *  0.15, 
+    marginLeft: width * 0.05, 
+    marginRight: width * 0.05, 
     backgroundColor: '#2FAFFF',
-    padding: 15,
+    padding: width * 0.04, 
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
@@ -128,8 +130,9 @@ const styles = StyleSheet.create({
   },
   sectionText: {
     color: '#000',
-    fontSize: 14,
-    lineHeight: 22,
+    fontSize: width * 0.035, 
+    lineHeight: height * 0.03, 
+    textAlign: 'center', 
   },
 });
 

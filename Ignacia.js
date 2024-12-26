@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, Image, ScrollView, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import Header from './Header';
+
+const { width, height } = Dimensions.get('window');
 
 const Ignacia = () => {
   const [activeSection, setActiveSection] = useState('ignacia');
@@ -54,53 +56,33 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#24348E',
   },
-  topHeader: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    paddingVertical: 10,
-  },
-  headerText: {
-    marginTop: 20,
-    color: '#fff',
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  activeText: {
-    color: '#329AFE',
-  },
-  activeLine: {
-    position: 'absolute',
-    bottom: 0,
-    height: 4,
-    backgroundColor: '#329AFE',
-    width: '50%',
-  },
-  lineLeft: { left: 0 },
-  lineRight: { right: 0 },
   section: {
-    marginBottom: 20,
+    marginBottom: height * 0.02,
   },
   headerImage: {
-    marginLeft: 20,
-    marginTop: 10,
-    width: '89.5%',
-    height: 120,
+    marginLeft: width * 0.05, 
+    marginTop: height * 0.02, 
+    width: width * 0.892, 
+    height: height * 0.15, 
     resizeMode: 'contain',
     zIndex: 2,
   },
   contentContainer: {
-    width: 318,
-    marginLeft: 35.3,
-    marginTop: -20,
-    padding: 15,
+    width: width * 0.87, 
+    marginLeft: width * 0.06, 
+    marginTop: -height * 0.02, 
+    padding: width * 0.04, 
     backgroundColor: '#fff',
     elevation: 3,
   },
   sectionText: {
     color: '#000',
-    fontSize: 14,
-    lineHeight: 22,
+    fontSize: width * 0.035, 
+    lineHeight: height * 0.03, 
+    paddingBottom: 500,
+
   },
 });
 
 export default Ignacia;
+

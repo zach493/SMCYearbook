@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, Image, ScrollView, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import Header from './Header';
+
+const { width, height } = Dimensions.get('window');
 
 const Alma = () => {
   const [activeSection, setActiveSection] = useState('stmichael');
@@ -62,12 +64,12 @@ const styles = StyleSheet.create({
   topHeader: {
     flexDirection: 'row',
     justifyContent: 'center',
-    paddingVertical: 10,
+    paddingVertical: height * 0.02, 
   },
   headerText: {
-    marginTop: 20,
+    marginTop: height * 0.02, 
     color: '#fff',
-    fontSize: 20,
+    fontSize: width * 0.05, 
     fontWeight: 'bold',
   },
   activeText: {
@@ -83,31 +85,30 @@ const styles = StyleSheet.create({
   lineLeft: { left: 0 },
   lineRight: { right: 0 },
   section: {
-    marginBottom: 20,
+    marginBottom: height * 0.02, 
   },
   headerImage: {
-    marginLeft: 20,
-    marginTop: 10,
-    width: '89.5%',
-    height: 120,
+    marginLeft: width * 0.014, 
+    marginTop: height * 0.01, 
+    width: width * 0.970, 
+    height: height * 0.17,
     resizeMode: 'contain',
     zIndex: 2,
   },
   contentContainer: {
-    width: 318,
-    marginLeft: 35.3,
-    marginTop: -30,
-    padding: 15,
+    width: width * 0.80, 
+    marginLeft: width * 0.095, 
+    marginTop: -height * 0.03,
+    padding: width * 0.06, 
     backgroundColor: '#fff',
     elevation: 3,
   },
   sectionText: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fff',
+    color: '#000',
+    fontSize: width * 0.035, 
+    lineHeight: height * 0.03, 
+    textAlign: 'center', 
   },
-  
 });
 
 export default Alma;

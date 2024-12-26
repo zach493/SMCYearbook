@@ -16,7 +16,6 @@ const Year = () => {
   useEffect(() => {
     navigation.setOptions({ title: collegeName });
 
-    // Fetch yearbook data from backend
     const fetchYearbookData = async () => {
       try {
         const response = await axios.get('https://smcyearbookdb-smcdbyearbook.up.railway.app/api/yearbook');
@@ -33,9 +32,9 @@ const Year = () => {
 
   const handleImagePress = (year, theme, image) => {
     navigation.navigate('College', { 
-      collegeName,   // From route params in Year.js
-      year,          // The year of the selected card
-      imageSource: image // The image to display
+      collegeName,   
+      year,          
+      imageSource: image 
     });
   };
   
@@ -104,6 +103,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 3,
     backgroundColor: '#24348E',
+    borderWidth: 3,
+    borderColor: '#1C2768',
   },
   image: {
     width: '100%',
@@ -114,14 +115,14 @@ const styles = StyleSheet.create({
   themeText: {
     fontStyle: 'italic',
     textAlign: 'center',
-    color: '#333',
+    color: '#fff',
     marginTop: 10,
     fontSize: 16,
   },
   yearText: {
     textAlign: 'center',
     fontSize: 14,
-    color: '#555',
+    color: '#fff',
     marginBottom: 10,
   },
 });

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { View, Image, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Image, ScrollView, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Header from './Header';
+
+const { width, height } = Dimensions.get('window');
 
 const Panel = () => {
   const navigation = useNavigation();
@@ -82,55 +84,53 @@ const styles = StyleSheet.create({
   },
 
   panelImage1: {
-    marginTop: 23,
-    marginLeft: -275,
-    width: '240%',
-    height: 110,
+    marginTop: height * 0.03, 
+    marginLeft: width * 0.06, 
+    width: width * 0.880, 
+    height: height * 0.17, 
     resizeMode: 'contain',
   },
 
   panelImage2: {
-    marginTop: 10,
-    width: '240%',
-    height: 110,
-    marginLeft: -275,
-
+    marginLeft: width * 0.06, 
+    marginTop: height * -0.01, 
+    width: width * 0.880, 
+    height: height * 0.17,  
     resizeMode: 'contain',  
   },
 
   panelImage3: {
-    marginLeft: -274,
-    marginTop: 10,
-    width: '240%',
-    height: 128,
+    marginLeft: width * 0.06, 
+    marginTop: height * -0.01, 
+    width: width * 0.880, 
+    height: height * 0.17, 
     resizeMode: 'contain',
   },
 
   panelImage4: {
-    marginLeft: -225,
-    marginTop: -10,
-    width: '215%',
-    height: 109,
+    marginLeft: width * 0.06, 
+    marginTop: height * -0.01, 
+    width: width * 0.880, 
+    height: height * 0.14, 
     resizeMode: 'contain',
   },
 
   panelImage5: {
-    marginLeft: 28,    
-    marginTop: 10,
-    width: '85.8%',
-    height: 101.5,
+    marginLeft: width * 0.07, 
+    marginTop: height * 0.01, 
+    width: width * 0.858, 
+    height: height * 0.15, 
     resizeMode: 'contain',
   },   
 
   panelImage6: {
-    marginLeft: 24,    
-    marginTop: 20,
-    width: '87.4%',
-    height: 110,
+    marginLeft: width * 0.06, 
+    marginTop: height * 0.02, 
+    width: width * 0.874, 
+    height: height * 0.15, 
     resizeMode: 'contain',
-    marginBottom: 20,
+    marginBottom: height * 0.02, 
   },
-
 });
 
 export default Panel;

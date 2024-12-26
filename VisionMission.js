@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ActivityIndicator, Alert, ScrollView, TouchableOpacity, Image } from 'react-native';
+import { View, Text, StyleSheet, ActivityIndicator, Alert, ScrollView, TouchableOpacity, Image, Dimensions } from 'react-native';
 import axios from 'axios';
 import Header from './Header';
+
+const { width, height } = Dimensions.get('window');
 
 const VisionMission = () => {
   const [activeSection, setActiveSection] = useState('mission');
@@ -87,32 +89,28 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#24348E',
+    paddingHorizontal: width * 0.05, 
   },
   headerImage: {
-    marginTop: 10,
-    marginLeft: -234,
-    width: '219%',
-    height: 107.4,
+    marginLeft: -4,
+    marginTop: height * 0.02, 
+    width: '102.6%', 
+    height: height * 0.15, 
     resizeMode: 'contain',
-    position: 'absolute',
-    top: 80,
+    position: 'center',
+    top: 70,
     zIndex: 2,
   },
   topHeader: {
+    marginTop: -140,
     flexDirection: 'row',
     justifyContent: 'space-around',
-    paddingVertical: 10,
-  },
-  topHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    paddingVertical: 10,
-    backgroundColor: '#24348E',
+    paddingVertical: height * 0.02, 
   },
   headerText: {
-    marginTop: 20,
+    marginTop: height * 0.02, 
     color: '#fff',
-    fontSize: 20,
+    fontSize: width * 0.05, 
     fontWeight: 'bold',
   },
   activeText: {
@@ -123,19 +121,15 @@ const styles = StyleSheet.create({
     bottom: 0,
     height: 4,
     backgroundColor: '#329AFE',
-    width: '50%',
+    width: '62%',
   },
-  lineLeft: { left: 0 },
-  lineRight: { right: 0 },
+  lineLeft: { left: -40 },
+  lineRight: { right: -40 },
   section: {
-    marginBottom: 20,
-  },
-  section: {
-    marginTop: 120,
-    marginLeft: 30,
-    marginRight: 30,
+    marginTop: height * 0.1,
+    marginBottom: height * 0.05, 
     backgroundColor: '#fff',
-    padding: 15,
+    padding: height * 0.02, 
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
@@ -143,16 +137,20 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   sectionText: {
+    marginTop: height * 0.06, 
     color: '#000',
-    fontSize: 14,
-    lineHeight: 24,
-  },
-  loadingContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-  },
-});
+    fontSize: width * 0.04, 
+    lineHeight: height * 0.03, 
+    marginBottom: 40,
 
+},
+
+loadingContainer: {
+  flex: 1,
+  justifyContent: 'center',
+  alignItems: 'center',
+  backgroundColor: '#fff',
+  padding: width * 0.05, 
+},
+});
 export default VisionMission;

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { View, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Image, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+
+const { width, height } = Dimensions.get('window');
 
 const Header = () => {
   const navigation = useNavigation();
@@ -129,9 +131,9 @@ const styles = StyleSheet.create({
     tintColor: 'white',
   },
   line: {
-    marginLeft: -10,
+    marginLeft: -25,
     height: 1,
-    width: 370,
+    width: width * 3,
     backgroundColor: 'white',
     opacity: 0.5,
   },
