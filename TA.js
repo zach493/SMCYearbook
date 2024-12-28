@@ -630,6 +630,10 @@ const styles = StyleSheet.create({
     borderColor: '#1C2768',
     backgroundColor: '#fff',
     alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 }, 
+    shadowOpacity: 0.25, 
+    elevation: 5, 
 
   },
   name: {

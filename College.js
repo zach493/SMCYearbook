@@ -113,7 +113,11 @@ const styles = StyleSheet.create({
     width: 100,
     height: 140,
     borderWidth: 3,
-    borderColor: '#6A3C88',
+    borderColor: '#1C2768',
+    shadowColor: '#000', // Shadow color
+    shadowOffset: { width: 0, height: 2 }, // Shadow offset
+    shadowOpacity: 0.25, // Shadow opacity
+    elevation: 5, // For Android shadow
   },
   profileName: {
     color: '#ffffff',
