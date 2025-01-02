@@ -54,45 +54,45 @@ const College = () => {
     "College of Arts And Sciences": {
       tabs: ["BAP", "BSP"],
       courses: {
-        "BAP": "BACHELOR OF ARTS IN PHILOSOPHY",
-        "BSP": "BACHELOR OF SCIENCE IN PSYCHOLOGY",
+       "BAP": "Bachelor of Arts in Philosophy",
+       "BSP": "Bachelor of Science in Psychology",
       },
     },
     "College of Education": {
       tabs: ["BAEL", "BECEd", "BEEd", "BSEd-ENGLISH", "BSEd-MATH", "BSNEd"],
       courses: {
-        "BAEL": "BACHELOR OF ARTS IN ENGLISH LANGUAGE",
-        "BECEd": "BACHELOR OF EARLY CHILDHOOD EDUCATION",
-        "BEEd": "BACHELOR OF ELEMENTARY EDUCATION",
-        "BSEd-ENGLISH": "BACHELOR OF SECONDARY EDUCATION MAJOR IN ENGLISH",
-        "BSEd-MATH": "BACHELOR OF SECONDARY EDUCATION MAJOR IN MATHEMATICS",
-        "BSNEd": "BACHELOR OF SPECIAL NEEDS EDUCATION (Generalist)",
+        "BAEL": "Bachelor of Arts in English Language",
+        "BECEd": "Bachelor of Early Childhood Education",
+        "BEEd": "Bachelor of Elementary Education",
+        "BSEd-ENGLISH": "Bachelor of Secondary Education Major in English",
+        "BSEd-MATH": "Bachelor of Secondary Education Major in Mathematics",
+        "BSNEd": "Bachelor of Special Needs Education (Generalist)",
       },
     },
     "College of Business Administration and Accountancy": {
       tabs: ["BSA", "BSBA-FM", "BSBA-HRM", "BSBA-MM", "BSBA-OM"],
       courses: {
-        "BSA": "BACHELOR OF SCIENCE IN ACCOUNTANCY",
-        "BSBA-FM": "BACHELOR OF SCIENCE IN BUSINESS ADMINISTRATION MAJOR IN FINANCIAL MANAGEMENT",
-        "BSBA-HRM": "BACHELOR OF SCIENCE IN BUSINESS ADMINISTRATION MAJOR IN HUMAN RESOURCE MANAGEMENT",
-        "BSBA-MM": "BACHELOR OF SCIENCE IN BUSINESS ADMINISTRATION MAJOR IN MARKETING MANAGEMENT",
-        "BSBA-OM": "BACHELOR OF SCIENCE IN BUSINESS ADMINISTRATION MAJOR IN OPERATIONS MANAGEMENT",
+       "BSA": "Bachelor of Science in Accountancy",
+       "BSBA-FM": "Bachelor of Science in Business Administration Major in Financial Management",
+       "BSBA-HRM": "Bachelor of Science in Business Administration Major in Human Resource Management",
+       "BSBA-MM": "Bachelor of Science in Business Administration Major in Marketing Management",
+       "BSBA-OM": "Bachelor of Science in Business Administration Major in Operations Management",
       },
     },
     "College of Engineering": {
       tabs: ["BSCE", "BSCpE", "BSECE"],
       courses: {
-        "BSCE": "Bachelor Of Science In Civil Engineering",
-        "BSCpE": "Bachelor Of Science In Computer Engineering",
-        "BSECE": "Bachelor Of Science In Electronics Engineering",
+        "BSCE": "Bachelor of Science In Civil Engineering",
+        "BSCpE": "Bachelor of Science In Computer Engineering",
+        "BSECE": "Bachelor of Science In Electronics Engineering",
       },
     },
     "College of Computer Studies": {
       tabs: ["BSCS", "BSIS", "BSIT"],
       courses: {
-        "BSCS": "BACHELOR OF SCIENCE IN COMPUTER SCIENCE",
-        "BSIS": "BACHELOR OF SCIENCE IN INFORMATION SYSTEMS",
-        "BSIT": "BACHELOR OF SCIENCE IN INFORMATION TECHNOLOGY",
+        "BSCS": "Bachelor of Science in Computer Science",
+        "BSIS": "Bachelor of Science in Information Systems",
+        "BSIT": "Bachelor of Science in Information Technology",
       },
     },
   };
@@ -201,9 +201,7 @@ const College = () => {
         ))}
       </ScrollView>
       </View>
-      {activeTab && (
-        <View style={[styles.activeLine, { width: activeTabWidth }]} /> 
-      )}
+  
       {renderContent()}
     </View>
   );
@@ -243,7 +241,7 @@ const styles = StyleSheet.create({
   },
   activeCourse: {
     color: '#fff',
-    fontSize: 18,
+    fontSize: 16,
     fontStyle: 'italic',
     marginTop: 10,
     backgroundColor: '#000080',
