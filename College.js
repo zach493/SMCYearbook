@@ -82,9 +82,9 @@ const College = () => {
     "College of Engineering": {
       tabs: ["BSCE", "BSCpE", "BSECE"],
       courses: {
-        "BSCE": "BACHELOR OF SCIENCE IN  CIVIL ENGINEERING",
-        "BSCpE": "BACHELOR OF SCIENCE IN COMPUTER ENGINEERING",
-        "BSECE": "BACHELOR OF SCIENCE IN ELECTRONICS ENGINEERING",
+        "BSCE": "Bachelor Of Science In Civil Engineering",
+        "BSCpE": "Bachelor Of Science In Computer Engineering",
+        "BSECE": "Bachelor Of Science In Electronics Engineering",
       },
     },
     "College of Computer Studies": {
@@ -130,34 +130,36 @@ const College = () => {
   const handleTabPress = (tab) => {
     setActiveTab(tab);
     // Trigger layout update for the active tab
-    const tabElement = document.getElementById(tab); // Assuming you have an ID for each tab
-    if (tabElement) {
-      tabElement.measure((x, y, width) => {
-        setActiveTabWidth(width);
-      });
-    }
+
   };
 
   const renderContent = () => {
     if (loading) {
       return <ActivityIndicator size="large" color="#FFFFFF" style={styles.loader} />;
     }
-
+  
+    // Filter alumni data based on the selected tab
+    const filteredAlumniData = alumniData.filter(alumni => alumni.alum_course === coursesData[collegeName]?.courses[activeTab]);
+  
     return (
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.profileContainer}>
-          {alumniData.map((alumni, index) => (
-            <View key={index} style={styles.profileCard}>
-              <Image
-                source={{ uri: alumni.img_url }} 
-                style={styles.profileImage}
-              />
-              <Text style={styles.profileName}>
-                {`${alumni.alum_fname} ${alumni.alum_mname} ${alumni.alum_lname}`}
-              </Text>
-              <Text style={styles.profileCaption}>"{alumni.motto}"</Text>
-            </View>
-          ))}
+          {filteredAlumniData.length > 0 ? (
+            filteredAlumniData.map((alumni, index) => (
+              <View key={index} style={styles.profileCard}>
+                <Image
+                  source={{ uri: alumni.img_url }} 
+                  style={styles.profileImage}
+                />
+                <Text style={styles.profileName}>
+                  {`${alumni.alum_fname} ${alumni.alum_mname} ${alumni.alum_lname}`}
+                </Text>
+                <Text style={styles.profileCaption}>"{alumni.alum_course}"</Text>
+              </View>
+            ))
+          ) : (
+            <Text style={styles.noDataText}>No alumni found for this course.</Text>
+          )}
         </View>
       </ScrollView>
     );
