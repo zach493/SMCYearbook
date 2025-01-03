@@ -27,6 +27,12 @@ const College = () => {
         return [styles.tab, styles.engineeringTab];
       case 'College of Computer Studies':
         return [styles.tab, styles.computerStudiesTab];
+      case 'College of Hospitality and Tourism Management':
+        return [styles.tab, styles.computerStudiesTab];
+      case 'College of Nursing':
+        return [styles.tab, styles.computerStudiesTab];
+      case 'College of Criminology':
+        return [styles.tab, styles.computerStudiesTab];
       default:
         return styles.tab;
     }
@@ -44,13 +50,19 @@ const College = () => {
         return [styles.tabText, styles.engineeringTabText];
       case 'College of Computer Studies':
         return [styles.tabText, styles.computerStudiesTabText];
+      case 'College of Hospitality and Tourism Management':
+        return [styles.tabText, styles.computerStudiesTab];
+      case 'College of Nursing':
+        return [styles.tabText, styles.computerStudiesTab];
+      case 'College of Criminology':
+        return [styles.tabText, styles.computerStudiesTab];
       default:
         return styles.tabText;
     }
   };
 
   const coursesData = {
-    "College of Arts And Sciences": {
+    "College of Arts and Sciences": {
       tabs: ["BAP", "BSP"],
       courses: {
        "BAP": "Bachelor of Arts in Philosophy",
@@ -86,12 +98,34 @@ const College = () => {
         "BSECE": "Bachelor of Science In Electronics Engineering",
       },
     },
-    "College of Computer Studies": {
+    "College of Hospitality and Tourism Management": {
       tabs: ["BSCS", "BSIS", "BSIT"],
       courses: {
         "BSCS": "Bachelor of Science in Computer Science",
         "BSIS": "Bachelor of Science in Information Systems",
         "BSIT": "Bachelor of Science in Information Technology",
+      },
+    },
+    "College of Hospitality and Tourism Management": {
+      tabs: ["BSCS", "BSIS", "BSIT"],
+      courses: {
+        "BSCS": "Bachelor of Science in Computer Science",
+        "BSIS": "Bachelor of Science in Information Systems",
+        "BSIT": "Bachelor of Science in Information Technology",
+      },
+    },
+    "College of Criminology": {
+      tabs: ["BSC"],
+      courses: {
+        "BSC": "Bachelor of Science in Criminology",
+
+      },
+    },
+    "College of Nursing": {
+      tabs: ["BSN"],
+      courses: {
+        "BSN": "Bachelor of Science in Nursing",
+
       },
     },
   };
@@ -112,8 +146,6 @@ const College = () => {
     };
     
     fetchAlumniData();
-
- // Set the active tab to the first course of the selected college by default
     if (coursesData[collegeName]?.tabs.length > 0) {
       setActiveTab(coursesData[collegeName].tabs[0]);
     }
@@ -128,7 +160,6 @@ const College = () => {
 
   const handleTabPress = (tab) => {
     setActiveTab(tab);
-    // Trigger layout update for the active tab
 
   };
 
@@ -136,8 +167,6 @@ const College = () => {
     if (loading) {
       return <ActivityIndicator size="large" color="#FFFFFF" style={styles.loader} />;
     }
-  
-    // Filter alumni data based on the selected tab
     const filteredAlumniData = alumniData.filter(alumni => alumni.alum_course === coursesData[collegeName]?.courses[activeTab]);
   
     return (
