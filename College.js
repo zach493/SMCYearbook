@@ -34,7 +34,7 @@ const College = () => {
   
   const getTabTextStyle = (collegeName) => {
     switch (collegeName) {
-      case 'College of Arts And Sciences':
+      case 'College of Arts and Sciences':
         return [styles.tabText, styles.artsAndSciencesTabText];
       case 'College of Education':
         return [styles.tabText, styles.educationTabText];
