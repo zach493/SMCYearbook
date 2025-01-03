@@ -13,11 +13,11 @@ const College = () => {
   const [alumniData, setAlumniData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('');
-  const [activeTabWidth, setActiveTabWidth] = useState(0); // State to hold the width of the active tab
+  const [activeTabWidth, setActiveTabWidth] = useState(0); 
 
   const getTabStyle = (collegeName) => {
     switch (collegeName) {
-      case 'College of Arts And Sciences':
+      case 'College of Arts and Sciences':
         return [styles.tab, styles.artsAndSciencesTab];
       case 'College of Education':
         return [styles.tab, styles.educationTab];
@@ -48,8 +48,7 @@ const College = () => {
         return styles.tabText;
     }
   };
-  
-  // Define courses for each college with abbreviations
+
   const coursesData = {
     "College of Arts And Sciences": {
       tabs: ["BAP", "BSP"],
