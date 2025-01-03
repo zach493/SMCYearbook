@@ -107,11 +107,10 @@ const College = () => {
       },
     },
     "College of Hospitality and Tourism Management": {
-      tabs: ["BSCS", "BSIS", "BSIT"],
+      tabs: ["CHTM"],
       courses: {
-        "BSCS": "Bachelor of Science in Computer Science",
-        "BSIS": "Bachelor of Science in Information Systems",
-        "BSIT": "Bachelor of Science in Information Technology",
+        "CHTM": "Bachelor of Science in Computer Science",
+
       },
     },
     "College of Criminology": {
