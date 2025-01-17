@@ -346,7 +346,6 @@ const handleStatusSHSelection = async (status) => {
                   hedDepartments.map((department) => (
                     <View key={department.name} style={styles.departmentContainer}>
                       <Text style={styles.departmentHeader}>{department.name}</Text>
-                      {/* Display faculty for this department */}
                       {facultyData[department.name] && facultyData[department.name].length > 0 ? (
                         <View style={styles.row}>
                           {facultyData[department.name].map((faculty, index) => (
