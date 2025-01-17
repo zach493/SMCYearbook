@@ -41,11 +41,8 @@ const TA = () => {
   const [statusHEData, setStatusHEData] = useState([]); 
   const [statusPCData, setStatusPCData] = useState([]); 
   const [statusSHData, setStatusSHData] = useState([]); 
-//////ADMINSTRATION
-//////
-//////
-//////
-//////
+
+//ADMINSTRATION
 const handleStatusSelection = async (status) => {
   setIsLoading(true);
   try {
@@ -53,7 +50,7 @@ const handleStatusSelection = async (status) => {
       `https://smcyearbookdb-smcdbyearbook.up.railway.app/api/faculty-status?status=Administration`
     );
     const data = await response.json();
-    setStatusData(data); // Update the state with the filtered data
+    setStatusData(data); 
   } catch (error) {
     console.error('Error fetching status data:', error);
   } finally {
@@ -61,9 +58,7 @@ const handleStatusSelection = async (status) => {
   }
 };
 
-//////Academic Heads
-//////
-//////
+//Academic Heads
 const handleStatusHESelection = async (status) => {
   setIsLoading(true);
   try {
@@ -71,16 +66,15 @@ const handleStatusHESelection = async (status) => {
       `https://smcyearbookdb-smcdbyearbook.up.railway.app/api/faculty-status?status=Higher Education`
     );
     const data = await response.json();
-    setStatusHEData(data); // Update the state with the filtered data
+    setStatusHEData(data);
   } catch (error) {
     console.error('Error fetching status data:', error);
   } finally {
     setIsLoading(false);
   }
 };
-//////Program Coordinators
-//////
-//////
+
+//Program Coordinators
 const handleStatusPCSelection = async (status) => {
   setIsLoading(true);
   try {
@@ -88,7 +82,7 @@ const handleStatusPCSelection = async (status) => {
       `https://smcyearbookdb-smcdbyearbook.up.railway.app/api/faculty-status?status=Program Coordinators`
     );
     const data = await response.json();
-    setStatusPCData(data); // Update the state with the filtered data
+    setStatusPCData(data); 
   } catch (error) {
     console.error('Error fetching status data:', error);
   } finally {
@@ -96,9 +90,7 @@ const handleStatusPCSelection = async (status) => {
   }
 };
 
-//////Service Heads
-//////
-//////
+//Service Heads
 const handleStatusSHSelection = async (status) => {
   setIsLoading(true);
   try {
@@ -106,7 +98,7 @@ const handleStatusSHSelection = async (status) => {
       `https://smcyearbookdb-smcdbyearbook.up.railway.app/api/faculty-status?status=Service Heads`
     );
     const data = await response.json();
-    setStatusSHData(data); // Update the state with the filtered data
+    setStatusSHData(data); 
   } catch (error) {
     console.error('Error fetching status data:', error);
   } finally {
@@ -114,29 +106,24 @@ const handleStatusSHSelection = async (status) => {
   }
 };
 
-//////DEPARTMENT
-//////
-//////
-//////
+//DEPARTMENT
   const handleDepartmentSelection = async () => {
     setIsLoading(true);
     try {
       const departmentPromises = hedDepartments.map(async (department) => {
         const response = await fetch(`https://smcyearbookdb-smcdbyearbook.up.railway.app/api/faculty-department?departmentName=${department.name}`);
         const data = await response.json();
-        return { name: department.name, data }; // Store the faculty data with its department name
+        return { name: department.name, data }; 
       });
   
-      // Wait for all fetch calls to complete
       const departmentsData = await Promise.all(departmentPromises);
   
-      // Store the data for each department using the department name
       const newFacultyData = {};
       departmentsData.forEach((department) => {
         newFacultyData[department.name] = department.data;
       });
   
-      setFacultyData(newFacultyData); // Update faculty data state
+      setFacultyData(newFacultyData); 
     } catch (error) {
       console.error('Error fetching faculty data:', error);
     } finally {
@@ -159,7 +146,7 @@ const handleStatusSHSelection = async (status) => {
     setActiveTab(tab.key);
     setHeaderTitle(tab.title);
   };
-/////////Use Effect For Tabs
+
   useEffect(() => {
     if (activeTab === 'hedFaculties') {
       handleDepartmentSelection();
@@ -465,8 +452,8 @@ const handleStatusSHSelection = async (status) => {
 
 const styles = StyleSheet.create({
   adminSection1: {//ntp
-    marginLeft: 70,//remove if you want it to be grid
-    width: '60%',//make it 30 if suggested grid
+    marginLeft: 70,
+    width: '60%',
     alignItems: 'center',
     padding: 15,
     marginVertical: 5,
@@ -476,8 +463,8 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   adminCard5: {//service
-    marginLeft: 75,//remove if you want it to be grid
-    width: '60%',//make it 30 if suggested grid
+    marginLeft: 75,
+    width: '60%',
     alignItems: 'center',
     padding: 15,
     marginVertical: 5,
@@ -494,7 +481,7 @@ const styles = StyleSheet.create({
   },
   adminCard4: {
     marginLeft: 75,
-    width: '60%',//make it 30 if suggested grid
+    width: '60%',
     alignItems: 'center',
     padding: 15,
     marginVertical: 5,
@@ -506,7 +493,7 @@ const styles = StyleSheet.create({
   },
   adminCard3: {
     marginLeft: 75,
-    width: '60%',//make it 30 if suggested grid
+    width: '60%',
     alignItems: 'center',
     padding: 15,
     marginVertical: 5,
@@ -517,8 +504,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   adminCard2: {
-    marginLeft: 75,//remove if you want it to be grid
-    width: '60%',//make it 30 if suggested grid
+    marginLeft: 75,
+    width: '60%',
     alignItems: 'center',
     padding: 15,
     marginVertical: 5,
@@ -530,8 +517,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   adminCard1: {
-    marginLeft: 75,//remove if you want it to be grid
-    width: '60%',//make it 30 if suggested grid
+    marginLeft: 75,
+    width: '60%',
     alignItems: 'center',
     padding: 15,
     marginVertical: 5,
@@ -542,8 +529,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   adminCard: {
-    marginLeft: 75,//remove if you want it to be grid
-    width: '60%',//make it 30 if suggested grid
+    marginLeft: 75,
+    width: '60%',
     alignItems: 'center',
     padding: 15,
     marginVertical: 5,

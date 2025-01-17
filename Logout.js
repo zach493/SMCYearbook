@@ -7,7 +7,7 @@ const MainScreen = ({ navigation }) => {
 
   const handleLogout = async () => {
     await logout();
-    navigation.replace('Login'); // Navigate back to the login screen
+    navigation.replace('Login'); 
   };
 
   return (

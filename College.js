@@ -13,7 +13,7 @@ const College = () => {
   const [alumniData, setAlumniData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('');
-  const [activeTabWidth, setActiveTabWidth] = useState(0); // State to hold the width of the active tab
+  const [activeTabWidth, setActiveTabWidth] = useState(0); 
 
   const getTabStyle = (collegeName) => {
     switch (collegeName) {
@@ -49,7 +49,6 @@ const College = () => {
     }
   };
   
-  // Define courses for each college with abbreviations
   const coursesData = {
     "College of Arts And Sciences": {
       tabs: ["BAP", "BSP"],
@@ -114,7 +113,6 @@ const College = () => {
     
     fetchAlumniData();
 
- // Set the active tab to the first course of the selected college by default
     if (coursesData[collegeName]?.tabs.length > 0) {
       setActiveTab(coursesData[collegeName].tabs[0]);
     }
@@ -129,7 +127,6 @@ const College = () => {
 
   const handleTabPress = (tab) => {
     setActiveTab(tab);
-    // Trigger layout update for the active tab
 
   };
 
@@ -138,7 +135,6 @@ const College = () => {
       return <ActivityIndicator size="large" color="#FFFFFF" style={styles.loader} />;
     }
   
-    // Filter alumni data based on the selected tab
     const filteredAlumniData = alumniData.filter(alumni => alumni.alum_course === coursesData[collegeName]?.courses[activeTab]);
   
     return (
@@ -186,7 +182,7 @@ const College = () => {
         {coursesData[collegeName]?.tabs.map((tab) => (
           <TouchableOpacity
             key={tab}
-            id={tab} // Assign an ID for layout measurement
+            id={tab} 
             style={[
               getTabStyle(collegeName), 
               activeTab === tab && styles.activeTab

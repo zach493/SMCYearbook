@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, Alert } from 'react-native';
 import axios from 'axios';
-import { useAuth } from './AuthProvider'; // Import useAuth
+import { useAuth } from './AuthProvider';
 import { nanoid } from 'nanoid/non-secure';
 
 
 const Login = ({ navigation }) => {
-  const { login } = useAuth(); // Access login function from AuthProvider
+  const { login } = useAuth();
   const [idNumber, setIdNumber] = useState('');
   const [password, setPassword] = useState('');
 
@@ -21,9 +21,9 @@ const Login = ({ navigation }) => {
       const { message, user } = response.data;
 
       if (message === 'Login successful') {
-        const token = nanoid(); // Generate a unique token
-        await login(user, token); // Save user and token using AuthProvider
-        navigation.navigate('Panel'); // Navigate to the main panel
+        const token = nanoid(); 
+        await login(user, token); 
+        navigation.navigate('Panel'); 
       } else {
         Alert.alert('Error', 'Invalid ID Number');
       }
@@ -58,7 +58,7 @@ const Login = ({ navigation }) => {
         <View style={styles.inputWrapper}>
             <Image source={require('./images/padlock.png')} style={styles.icon} />
             <TextInput
-              value={password}  // Capture password input, but don't use it
+              value={password}  
               onChangeText={setPassword}
               placeholder="Password (does nothing)"
               style={styles.input}
