@@ -123,11 +123,11 @@ const handleStatusRVMSelection = async (status) => {
 //////NTP
 //////
 ///// 
-const handleStatusNTPSelection = async (status) => {
+const handleStatusNTPSelection = async () => {
   setIsLoading(true);
   try {
     const response = await fetch(
-      `https://smcyearbookdb-smcdbyearbook.up.railway.app/api/faculty-status?status=NTP`
+      `https://smcyearbookdb-smcdbyearbook.up.railway.app/api/ntp`
     );
     const data = await response.json();
     setStatusNTPData(data); 
@@ -251,7 +251,7 @@ const handleStatusSHSelection = async (status) => {
   }, [activeTab]);
   useEffect(() => {
     if (activeTab === 'nonTeaching') {
-      handleStatusNTPSelection('Non-Teaching Personnel');
+      handleStatusNTPSelection();
     }
   }, [activeTab]);
   
@@ -469,6 +469,7 @@ const handleStatusSHSelection = async (status) => {
                                 <Image source={require('./images/smclogo.png')} style={styles.adminLogo} />
                               )}
                               <Text style={styles.name}>{head.name}</Text>
+                              <Text style={styles.position}>{head.department}</Text>
                               <Text style={styles.position}>{head.position}</Text>
                             </View>
                           ))
