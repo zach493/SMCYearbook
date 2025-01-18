@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Image, Text, ImageBackground, ActivityIndicator, Alert } from 'react-native';
 import axios from 'axios';
-import { useAuth } from './AuthProvider'; // Use the logged-in user's auth info
+import { useAuth } from './AuthProvider'; 
 import Header from './Header';
 
 const Profile = () => {
-  const { auth } = useAuth(); // Access the logged-in user's auth
+  const { auth } = useAuth(); 
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -17,8 +17,6 @@ const Profile = () => {
           Alert.alert('Error', 'Unable to fetch profile. Please log in again.');
           return;
         }
-    
-        // Fetch both alumni details and image URL
         const response = await axios.get(`https://smcyearbookdb-smcdbyearbook.up.railway.app/alumniprof?idNumber=${alumId}`);
         const alumData = response.data;
         
@@ -33,7 +31,7 @@ const Profile = () => {
           yearGraduated: alumData.alumni.alum_year,
           college: alumData.alumni.alum_course,
           motto: alumData.alumni.motto,
-          image: alumData.img_url, // Image URL from the combined response
+          image: alumData.img_url, 
         });
 
       } catch (error) {
@@ -73,7 +71,7 @@ const Profile = () => {
         <View style={styles.profileContainer}>
           <View style={styles.profileHeader}>
             <Image
-              source={{ uri: profile.image || 'https://via.placeholder.com/150' }} // Use the URL directly
+              source={{ uri: profile.image || 'https://via.placeholder.com/150' }}
               style={styles.profileImage}
             />
           </View>

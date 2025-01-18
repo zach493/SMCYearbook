@@ -41,6 +41,11 @@ const TA = () => {
   const [statusHEData, setStatusHEData] = useState([]); 
   const [statusPCData, setStatusPCData] = useState([]); 
   const [statusSHData, setStatusSHData] = useState([]); 
+  const [statusRVMData, setStatusRVMData] = useState([]); 
+  const [statusOHData, setStatusOHData] = useState([]); 
+  const [statusNTPData, setStatusNTPData] = useState([]); 
+
+
 //////ADMINSTRATION
 //////
 //////
@@ -53,7 +58,7 @@ const handleStatusSelection = async (status) => {
       `https://smcyearbookdb-smcdbyearbook.up.railway.app/api/faculty-status?status=Administration`
     );
     const data = await response.json();
-    setStatusData(data); // Update the state with the filtered data
+    setStatusData(data);
   } catch (error) {
     console.error('Error fetching status data:', error);
   } finally {
@@ -71,14 +76,69 @@ const handleStatusHESelection = async (status) => {
       `https://smcyearbookdb-smcdbyearbook.up.railway.app/api/faculty-status?status=Higher Education`
     );
     const data = await response.json();
-    setStatusHEData(data); // Update the state with the filtered data
+    setStatusHEData(data); 
   } catch (error) {
     console.error('Error fetching status data:', error);
   } finally {
     setIsLoading(false);
   }
 };
-//////Program Coordinators
+
+
+
+//////Office Heads
+//////
+//////
+const handleStatusOHSelection = async (status) => {
+  setIsLoading(true);
+  try {
+    const response = await fetch(
+      `https://smcyearbookdb-smcdbyearbook.up.railway.app/api/faculty-status?status=Office Heads`
+    );
+    const data = await response.json();
+    setStatusOHData(data); 
+  } catch (error) {
+    console.error('Error fetching status data:', error);
+  } finally {
+    setIsLoading(false);
+  }
+};
+//////RVM
+//////
+//////
+const handleStatusRVMSelection = async (status) => {
+  setIsLoading(true);
+  try {
+    const response = await fetch(
+      `https://smcyearbookdb-smcdbyearbook.up.railway.app/api/faculty-status?status=RVM`
+    );
+    const data = await response.json();
+    setStatusRVMData(data); 
+  } catch (error) {
+    console.error('Error fetching status data:', error);
+  } finally {
+    setIsLoading(false);
+  }
+};
+//////NTP
+//////
+///// 
+const handleStatusNTPSelection = async (status) => {
+  setIsLoading(true);
+  try {
+    const response = await fetch(
+      `https://smcyearbookdb-smcdbyearbook.up.railway.app/api/faculty-status?status=NTP`
+    );
+    const data = await response.json();
+    setStatusNTPData(data); 
+  } catch (error) {
+    console.error('Error fetching status data:', error);
+  } finally {
+    setIsLoading(false);
+  }
+};
+
+/////Program Coordinators
 //////
 //////
 const handleStatusPCSelection = async (status) => {
@@ -88,7 +148,7 @@ const handleStatusPCSelection = async (status) => {
       `https://smcyearbookdb-smcdbyearbook.up.railway.app/api/faculty-status?status=Program Coordinators`
     );
     const data = await response.json();
-    setStatusPCData(data); // Update the state with the filtered data
+    setStatusPCData(data); 
   } catch (error) {
     console.error('Error fetching status data:', error);
   } finally {
@@ -106,7 +166,7 @@ const handleStatusSHSelection = async (status) => {
       `https://smcyearbookdb-smcdbyearbook.up.railway.app/api/faculty-status?status=Service Heads`
     );
     const data = await response.json();
-    setStatusSHData(data); // Update the state with the filtered data
+    setStatusSHData(data); 
   } catch (error) {
     console.error('Error fetching status data:', error);
   } finally {
@@ -124,19 +184,15 @@ const handleStatusSHSelection = async (status) => {
       const departmentPromises = hedDepartments.map(async (department) => {
         const response = await fetch(`https://smcyearbookdb-smcdbyearbook.up.railway.app/api/faculty-department?departmentName=${department.name}`);
         const data = await response.json();
-        return { name: department.name, data }; // Store the faculty data with its department name
+        return { name: department.name, data };
       });
-  
-      // Wait for all fetch calls to complete
       const departmentsData = await Promise.all(departmentPromises);
-  
-      // Store the data for each department using the department name
       const newFacultyData = {};
       departmentsData.forEach((department) => {
         newFacultyData[department.name] = department.data;
       });
   
-      setFacultyData(newFacultyData); // Update faculty data state
+      setFacultyData(newFacultyData); 
     } catch (error) {
       console.error('Error fetching faculty data:', error);
     } finally {
@@ -159,7 +215,7 @@ const handleStatusSHSelection = async (status) => {
     setActiveTab(tab.key);
     setHeaderTitle(tab.title);
   };
-/////////Use Effect For Tabs
+
   useEffect(() => {
     if (activeTab === 'hedFaculties') {
       handleDepartmentSelection();
@@ -181,6 +237,21 @@ const handleStatusSHSelection = async (status) => {
   useEffect(() => {
     if (activeTab === 'serviceHeads') {
       handleStatusSHSelection('Service Heads');
+    }
+  }, [activeTab]);
+  useEffect(() => {
+    if (activeTab === 'rvmSisters') {
+      handleStatusRVMSelection('RVM Sisters');
+    }
+  }, [activeTab]);
+  useEffect(() => {
+    if (activeTab === 'officeHeads') {
+      handleStatusOHSelection('Office Heads');
+    }
+  }, [activeTab]);
+  useEffect(() => {
+    if (activeTab === 'nonTeaching') {
+      handleStatusNTPSelection('Non-Teaching Personnel');
     }
   }, [activeTab]);
   
@@ -270,58 +341,56 @@ const handleStatusSHSelection = async (status) => {
           case 'rvmSisters':
             return (
               <ScrollView style={styles.scrollContainer}>
-                <View style={styles.gridContainer3}>
-                  <View style={styles.adminCard3}>
-                    <Image source={require('./images/smclogo.png')} style={styles.adminLogo} />
-                    <Text style={styles.name}>RVM Sister 1</Text>
-                    <Text style={styles.position}>Position</Text>
+              {isLoading ? (
+                <Text style={styles.noContent}>Loading...</Text>
+              ) : (
+                statusRVMData.length > 0 ? (
+                  <View style={styles.gridContainer2}>
+                    {statusRVMData.map((head, index) => (
+                      <View key={index} style={styles.adminCard2}>
+                        {head.image ? (
+                          <Image source={{ uri: head.image }} style={styles.adminLogo} />
+                        ) : (
+                          <Image source={require('./images/smclogo.png')} style={styles.adminLogo} />
+                        )}
+                        <Text style={styles.name}>{head.name}</Text>
+                        <Text style={styles.position}>{head.position}</Text>
+                      </View>
+                    ))}
                   </View>
-                  <View style={styles.adminCard3}>
-                    <Image source={require('./images/smclogo.png')} style={styles.adminLogo} />
-                    <Text style={styles.name}>RVM Sister 2</Text>
-                    <Text style={styles.position}>Position</Text>
-                  </View>
-                  <View style={styles.adminCard3}>
-                    <Image source={require('./images/smclogo.png')} style={styles.adminLogo} />
-                    <Text style={styles.name}>RVM Sister 3</Text>
-                    <Text style={styles.position}>Position</Text>
-                  </View>
-                  <View style={styles.adminCard3}>
-                    <Image source={require('./images/smclogo.png')} style={styles.adminLogo} />
-                    <Text style={styles.name}>RVM Sister 4</Text>
-                    <Text style={styles.position}>Position</Text>
-                  </View>
-                </View>
-              </ScrollView>
-            );
+                ) : (
+                  <Text style={styles.noContent}>No data found</Text>
+                )
+              )}
+            </ScrollView>
+          );
           
             case 'officeHeads':
               return (
                 <ScrollView style={styles.scrollContainer}>
-                  <View style={styles.gridContainer4}>
-                    <View style={styles.adminCard4}>
-                      <Image source={require('./images/smclogo.png')} style={styles.adminLogo} />
-                      <Text style={styles.name}>Office Head 1</Text>
-                      <Text style={styles.position}>Position</Text>
+                {isLoading ? (
+                  <Text style={styles.noContent}>Loading...</Text>
+                ) : (
+                  statusOHData.length > 0 ? (
+                    <View style={styles.gridContainer2}>
+                      {statusOHData.map((head, index) => (
+                        <View key={index} style={styles.adminCard2}>
+                          {head.image ? (
+                            <Image source={{ uri: head.image }} style={styles.adminLogo} />
+                          ) : (
+                            <Image source={require('./images/smclogo.png')} style={styles.adminLogo} />
+                          )}
+                          <Text style={styles.name}>{head.name}</Text>
+                          <Text style={styles.position}>{head.position}</Text>
+                        </View>
+                      ))}
                     </View>
-                    <View style={styles.adminCard4}>
-                      <Image source={require('./images/smclogo.png')} style={styles.adminLogo} />
-                      <Text style={styles.name}>Office Head 2</Text>
-                      <Text style={styles.position}>Position</Text>
-                    </View>
-                    <View style={styles.adminCard4}>
-                      <Image source={require('./images/smclogo.png')} style={styles.adminLogo} />
-                      <Text style={styles.name}>Office Head 3</Text>
-                      <Text style={styles.position}>Position</Text>
-                    </View>
-                    <View style={styles.adminCard4}>
-                      <Image source={require('./images/smclogo.png')} style={styles.adminLogo} />
-                      <Text style={styles.name}>Office Head 4</Text>
-                      <Text style={styles.position}>Position</Text>
-                    </View>
-                  </View>
-                </ScrollView>
-              );
+                  ) : (
+                    <Text style={styles.noContent}>No data found</Text>
+                  )
+                )}
+              </ScrollView>
+            );
             
               case 'serviceHeads':
                 return (
@@ -391,28 +460,21 @@ const handleStatusSHSelection = async (status) => {
                       <Text style={styles.noContent}>Loading...</Text>
                     ) : (
                       <View style={styles.gridContainer5}>
-                        <View style={styles.row}>
-                          <View style={styles.adminSection1}>
-                            <Image source={require('./images/smclogo.png')} style={styles.adminLogo} />
-                            <Text style={styles.name}>Non-Teaching Personnel 1</Text>
-                            <Text style={styles.position}>Position</Text>
-                          </View>
-                          <View style={styles.adminSection1}>
-                            <Image source={require('./images/smclogo.png')} style={styles.adminLogo} />
-                            <Text style={styles.name}>Non-Teaching Personnel 2</Text>
-                            <Text style={styles.position}>Position</Text>
-                          </View>
-                          <View style={styles.adminSection1}>
-                            <Image source={require('./images/smclogo.png')} style={styles.adminLogo} />
-                            <Text style={styles.name}>Non-Teaching Personnel 3</Text>
-                            <Text style={styles.position}>Position</Text>
-                          </View>
-                          <View style={styles.adminSection1}>
-                            <Image source={require('./images/smclogo.png')} style={styles.adminLogo} />
-                            <Text style={styles.name}>Non-Teaching Personnel 4</Text>
-                            <Text style={styles.position}>Position</Text>
-                          </View>
-                        </View>
+                        {statusNTPData.length > 0 ? (
+                          statusNTPData.map((head, index) => (
+                            <View key={index} style={styles.adminCard5}>
+                              {head.image ? (
+                                <Image source={{ uri: head.image }} style={styles.adminLogo} />
+                              ) : (
+                                <Image source={require('./images/smclogo.png')} style={styles.adminLogo} />
+                              )}
+                              <Text style={styles.name}>{head.name}</Text>
+                              <Text style={styles.position}>{head.position}</Text>
+                            </View>
+                          ))
+                        ) : (
+                          <Text style={styles.noContent}>No data found</Text>
+                        )}
                       </View>
                     )}
                   </ScrollView>

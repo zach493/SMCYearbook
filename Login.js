@@ -21,9 +21,9 @@ const Login = ({ navigation }) => {
       const { message, user } = response.data;
 
       if (message === 'Login successful') {
-        const token = nanoid(); // Generate a unique token
-        await login(user, token); // Save user and token using AuthProvider
-        navigation.navigate('Panel'); // Navigate to the main panel
+        const token = nanoid(); 
+        await login(user, token); 
+        navigation.navigate('Panel');
       } else {
         Alert.alert('Error', 'Invalid ID Number');
       }
