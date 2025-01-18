@@ -110,7 +110,7 @@ const handleStatusRVMSelection = async (status) => {
   setIsLoading(true);
   try {
     const response = await fetch(
-      `https://smcyearbookdb-smcdbyearbook.up.railway.app/api/faculty-status?status=RVM`
+      `https://smcyearbookdb-smcdbyearbook.up.railway.app/api/faculty-status?status=RVM Sisters`
     );
     const data = await response.json();
     setStatusRVMData(data); 
