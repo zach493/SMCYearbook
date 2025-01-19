@@ -93,9 +93,9 @@ const College = () => {
     "College of Engineering": {
       tabs: ["BSCE", "BSCpE", "BSECE"],
       courses: {
-        "BSCE": "Bachelor of Science In Civil Engineering",
-        "BSCpE": "Bachelor of Science In Computer Engineering",
-        "BSECE": "Bachelor of Science In Electronics Engineering",
+        "BSCE": "Bachelor of Science in Civil Engineering",
+        "BSCpE": "Bachelor of Science in Computer Engineering",
+        "BSECE": "Bachelor of Science in Electronics Engineering",
       },
     },
     "College of Computer Studies": {
