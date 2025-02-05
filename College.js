@@ -17,7 +17,7 @@ const College = () => {
 
   const getTabStyle = (collegeName) => {
     switch (collegeName) {
-      case 'College of Arts And Sciences':
+      case 'College of Arts and Sciences':
         return [styles.tab, styles.artsAndSciencesTab];
       case 'College of Education':
         return [styles.tab, styles.educationTab];
@@ -27,6 +27,12 @@ const College = () => {
         return [styles.tab, styles.engineeringTab];
       case 'College of Computer Studies':
         return [styles.tab, styles.computerStudiesTab];
+      case 'College of Hospitality and Tourism Management':
+        return [styles.tab, styles.computerStudiesTab];
+      case 'College of Nursing':
+        return [styles.tab, styles.computerStudiesTab];
+      case 'College of Criminology':
+        return [styles.tab, styles.computerStudiesTab];
       default:
         return styles.tab;
     }
@@ -34,7 +40,7 @@ const College = () => {
   
   const getTabTextStyle = (collegeName) => {
     switch (collegeName) {
-      case 'College of Arts And Sciences':
+      case 'College of Arts and Sciences':
         return [styles.tabText, styles.artsAndSciencesTabText];
       case 'College of Education':
         return [styles.tabText, styles.educationTabText];
@@ -44,13 +50,23 @@ const College = () => {
         return [styles.tabText, styles.engineeringTabText];
       case 'College of Computer Studies':
         return [styles.tabText, styles.computerStudiesTabText];
+      case 'College of Hospitality and Tourism Management':
+        return [styles.tabText, styles.computerStudiesTab];
+      case 'College of Nursing':
+        return [styles.tabText, styles.computerStudiesTab];
+      case 'College of Criminology':
+        return [styles.tabText, styles.computerStudiesTab];
       default:
         return styles.tabText;
     }
   };
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> 40bdcf5b8af57d852e58e1ad5eb76422f081b2d3
   const coursesData = {
-    "College of Arts And Sciences": {
+    "College of Arts and Sciences": {
       tabs: ["BAP", "BSP"],
       courses: {
        "BAP": "Bachelor of Arts in Philosophy",
@@ -81,9 +97,9 @@ const College = () => {
     "College of Engineering": {
       tabs: ["BSCE", "BSCpE", "BSECE"],
       courses: {
-        "BSCE": "Bachelor of Science In Civil Engineering",
-        "BSCpE": "Bachelor of Science In Computer Engineering",
-        "BSECE": "Bachelor of Science In Electronics Engineering",
+        "BSCE": "Bachelor of Science in Civil Engineering",
+        "BSCpE": "Bachelor of Science in Computer Engineering",
+        "BSECE": "Bachelor of Science in Electronics Engineering",
       },
     },
     "College of Computer Studies": {
@@ -92,6 +108,27 @@ const College = () => {
         "BSCS": "Bachelor of Science in Computer Science",
         "BSIS": "Bachelor of Science in Information Systems",
         "BSIT": "Bachelor of Science in Information Technology",
+      },
+    },
+    "College of Hospitality and Tourism Management": {
+      tabs: ["CHTM"],
+      courses: {
+        "CHTM": "Bachelor of Science in Hospitality and Tourism Management",
+
+      },
+    },
+    "College of Criminology": {
+      tabs: ["BSC"],
+      courses: {
+        "BSC": "Bachelor of Science in Criminology",
+
+      },
+    },
+    "College of Nursing": {
+      tabs: ["BSN"],
+      courses: {
+        "BSN": "Bachelor of Science in Nursing",
+
       },
     },
   };
@@ -112,7 +149,10 @@ const College = () => {
     };
     
     fetchAlumniData();
+<<<<<<< HEAD
 
+=======
+>>>>>>> 40bdcf5b8af57d852e58e1ad5eb76422f081b2d3
     if (coursesData[collegeName]?.tabs.length > 0) {
       setActiveTab(coursesData[collegeName].tabs[0]);
     }
@@ -134,7 +174,10 @@ const College = () => {
     if (loading) {
       return <ActivityIndicator size="large" color="#FFFFFF" style={styles.loader} />;
     }
+<<<<<<< HEAD
   
+=======
+>>>>>>> 40bdcf5b8af57d852e58e1ad5eb76422f081b2d3
     const filteredAlumniData = alumniData.filter(alumni => alumni.alum_course === coursesData[collegeName]?.courses[activeTab]);
   
     return (

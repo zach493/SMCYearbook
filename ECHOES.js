@@ -7,7 +7,7 @@ const College = () => {
   const navigation = useNavigation();
 
   const colleges = [
-    { name: 'College of Arts And Social Sciences', image: require('./images/cas-wo.png') },
+    { name: 'College of Arts and Sciences', image: require('./images/cas-wo.png') },
     { name: 'College of Business Administration and Accountancy', image: require('./images/cbaa-wo.png') },
     { name: 'College of Education', image: require('./images/ced-wo.png') },
     { name: 'College of Hospitality and Tourism Management', image: require('./images/chtm-white.jpg') },
