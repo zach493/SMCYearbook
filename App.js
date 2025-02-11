@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { AuthProvider } from './AuthProvider'; // Import AuthProvider
+import { AuthProvider } from './AuthProvider'; 
 import Main from './Main';
 import Login from './Login';
 import Panel from './Panel';

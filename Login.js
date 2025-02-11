@@ -23,11 +23,7 @@ const Login = ({ navigation }) => {
       if (message === 'Login successful') {
         const token = nanoid(); 
         await login(user, token); 
-<<<<<<< HEAD
         navigation.navigate('Panel'); 
-=======
-        navigation.navigate('Panel');
->>>>>>> 40bdcf5b8af57d852e58e1ad5eb76422f081b2d3
       } else {
         Alert.alert('Error', 'Invalid ID Number');
       }

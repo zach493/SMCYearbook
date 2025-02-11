@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Image, Text, ScrollView, ActivityIndicator, Alert, TouchableOpacity, Dimensions } from 'react-native';
+import { StyleSheet, View, Image, Text, ScrollView, ActivityIndicator, Alert, TouchableOpacity, Dimensions, Modal } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import axios from 'axios';
 import Header from './Header';
@@ -14,6 +14,9 @@ const College = () => {
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('');
   const [activeTabWidth, setActiveTabWidth] = useState(0); 
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedImages, setSelectedImages] = useState([]);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const getTabStyle = (collegeName) => {
     switch (collegeName) {
@@ -28,11 +31,11 @@ const College = () => {
       case 'College of Computer Studies':
         return [styles.tab, styles.computerStudiesTab];
       case 'College of Hospitality and Tourism Management':
-        return [styles.tab, styles.computerStudiesTab];
+        return [styles.tab, styles.hospitalityTab];
       case 'College of Nursing':
-        return [styles.tab, styles.computerStudiesTab];
+        return [styles.tab, styles.nursingTab];
       case 'College of Criminology':
-        return [styles.tab, styles.computerStudiesTab];
+        return [styles.tab, styles.criminologyTab];
       default:
         return styles.tab;
     }
@@ -51,20 +54,16 @@ const College = () => {
       case 'College of Computer Studies':
         return [styles.tabText, styles.computerStudiesTabText];
       case 'College of Hospitality and Tourism Management':
-        return [styles.tabText, styles.computerStudiesTab];
+        return [styles.tabText, styles.hospitalityTabText];
       case 'College of Nursing':
-        return [styles.tabText, styles.computerStudiesTab];
+        return [styles.tabText, styles.nursingTabText];
       case 'College of Criminology':
-        return [styles.tabText, styles.computerStudiesTab];
+        return [styles.tabText, styles.criminologyTabText];
       default:
         return styles.tabText;
     }
   };
-<<<<<<< HEAD
-  
-=======
 
->>>>>>> 40bdcf5b8af57d852e58e1ad5eb76422f081b2d3
   const coursesData = {
     "College of Arts and Sciences": {
       tabs: ["BAP", "BSP"],
@@ -100,7 +99,7 @@ const College = () => {
         "BSCE": "Bachelor of Science in Civil Engineering",
         "BSCpE": "Bachelor of Science in Computer Engineering",
         "BSECE": "Bachelor of Science in Electronics Engineering",
-      },
+ },
     },
     "College of Computer Studies": {
       tabs: ["BSCS", "BSIS", "BSIT"],
@@ -114,21 +113,18 @@ const College = () => {
       tabs: ["CHTM"],
       courses: {
         "CHTM": "Bachelor of Science in Hospitality and Tourism Management",
-
       },
     },
     "College of Criminology": {
       tabs: ["BSC"],
       courses: {
         "BSC": "Bachelor of Science in Criminology",
-
       },
     },
     "College of Nursing": {
       tabs: ["BSN"],
       courses: {
         "BSN": "Bachelor of Science in Nursing",
-
       },
     },
   };
@@ -149,10 +145,6 @@ const College = () => {
     };
     
     fetchAlumniData();
-<<<<<<< HEAD
-
-=======
->>>>>>> 40bdcf5b8af57d852e58e1ad5eb76422f081b2d3
     if (coursesData[collegeName]?.tabs.length > 0) {
       setActiveTab(coursesData[collegeName].tabs[0]);
     }
@@ -167,43 +159,39 @@ const College = () => {
 
   const handleTabPress = (tab) => {
     setActiveTab(tab);
-
   };
 
+  const openModal = (alumni) => {
+    const images = [
+      { type: 'Toga', uri: alumni.img_url },
+      { type: 'SMC School Uniform', uri: alumni.img_school_uniform },
+      { type: 'Corporate Attire', uri: alumni.img_corporate_attire }
+    ];
+    setSelectedImages(images);
+    setSelectedImage(images[0]);
+    setModalVisible(true);
+  };
+  
   const renderContent = () => {
     if (loading) {
       return <ActivityIndicator size="large" color="#FFFFFF" style={styles.loader} />;
     }
-<<<<<<< HEAD
-  
-=======
->>>>>>> 40bdcf5b8af57d852e58e1ad5eb76422f081b2d3
     const filteredAlumniData = alumniData.filter(alumni => alumni.alum_course === coursesData[collegeName]?.courses[activeTab]);
   
     return (
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.profileContainer}>
-          {filteredAlumniData.length > 0 ? (
-            filteredAlumniData.map((alumni, index) => (
-              <View key={index} style={styles.profileCard}>
-                <Image
-                  source={{ uri: alumni.img_url }} 
-                  style={styles.profileImage}
-                />
-                <Text style={styles.profileName}>
-                  {`${alumni.alum_fname} ${alumni.alum_mname} ${alumni.alum_lname}`}
-                </Text>
-                <Text style={styles.profileCaption}>"{alumni.alum_course}"</Text>
-              </View>
-            ))
-          ) : (
-            <Text style={styles.noDataText}>No alumni found for this course.</Text>
-          )}
+          {filteredAlumniData.map((alumni, index) => (
+            <TouchableOpacity key={index} style={styles.profileCard} onPress={() => openModal(alumni)}>
+              <Image source={{ uri: alumni.img_url }} style={styles.profileImage} />
+              <Text style={styles.profileName}>{`${alumni.alum_fname} ${alumni.alum_lname}`}</Text>
+            </TouchableOpacity>
+          ))}
         </View>
       </ScrollView>
     );
   };
-
+    
   return (
     <View style={styles.container}>
       <Header />
@@ -216,43 +204,104 @@ const College = () => {
         </Text>
       </View>
       <View style={styles.tabContainer}>
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.scrollContent}
-        bounces={false}
-      >
-        {coursesData[collegeName]?.tabs.map((tab) => (
-          <TouchableOpacity
-            key={tab}
-            id={tab} 
-            style={[
-              getTabStyle(collegeName), 
-              activeTab === tab && styles.activeTab
-            ]}
-            onPress={() => handleTabPress(tab)}
-            onLayout={handleTabLayout}
-          >
-            <Text style={[getTabTextStyle(collegeName), activeTab === tab && styles.activeTabText]}>
-              {tab}
-            </Text>
-          </TouchableOpacity>
-        ))}
-      </ScrollView>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.scrollContent}
+          bounces={false}
+        >
+          {coursesData[collegeName]?.tabs.map((tab) => (
+            <TouchableOpacity
+              key={tab}
+              id={tab} 
+              style={[
+                getTabStyle(collegeName), 
+                activeTab === tab && styles.activeTab
+              ]}
+              onPress={() => handleTabPress(tab)}
+              onLayout={handleTabLayout}
+            >
+              <Text style={[getTabTextStyle(collegeName), activeTab === tab && styles.activeTabText]}>
+                {tab}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
       </View>
   
       {renderContent()}
+
+      <Modal animationType="slide" transparent={true} visible={modalVisible}>
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+          <TouchableOpacity onPress={() => setModalVisible(false)} style={styles.closeButton}>
+                <Text style={styles.closeButtonText}>x</Text>
+        </TouchableOpacity>
+            <Image source={{ uri: selectedImage?.uri }} style={styles.modalImage} />
+            <Text style={styles.modalTitle }>{selectedImage?.type}</Text>
+            <View style={styles.imageSelectionContainer}>
+              {selectedImages.map((img, idx) => (
+                <TouchableOpacity key={idx} onPress={() => setSelectedImage(img)}>
+                  <Image source={{ uri: img.uri }} style={styles.selectionImage} />
+                </TouchableOpacity>
+              ))}
+            </View>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#24348E',
+  container: { 
+    flex: 1, 
+    backgroundColor: '#24348E' 
   },
-  loader: {
-    marginTop: 50,
+  modalContainer: { 
+    flex: 1, 
+    justifyContent: 'center', 
+    alignItems: 'center', 
+    backgroundColor: 'rgba(0,0,0,0.8)' 
+  },
+  modalContent: { 
+    padding: 20, 
+    alignItems: 'center', 
+    borderRadius: 10, 
+    width: '90%' 
+  },
+  modalTitle: { 
+    color: '#fff',
+    fontSize: 18, 
+    fontWeight: 'semibold', 
+    marginBottom: 10,
+    marginTop: 10,
+    fontSize: 25,
+    fontStyle: 'italic',
+  },
+  modalImage: { 
+    width: width * 0.8, 
+    height: height * 0.4, 
+    resizeMode: 'contain' 
+  },
+  imageSelectionContainer: { 
+    flexDirection: 'row', 
+    marginTop: 10 
+  },
+  selectionImage: { 
+    width: 60, 
+    height: 60, 
+    marginHorizontal: 5, 
+    borderWidth: 2, 
+    borderColor: '#24348E' 
+  },
+
+  closeButtonText: { 
+    color: '#fff', 
+    fontWeight: '800', 
+    marginLeft: 276,
+    fontSize: 20,
+    marginTop: -30,
   },
   header: {
     width: '100%',
@@ -270,6 +319,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginTop: 10,
     textAlign: 'center',
+    
   },
   line1: {
     width: 200,
@@ -418,5 +468,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
+
 
 export default College;

@@ -17,10 +17,6 @@ const Profile = () => {
           Alert.alert('Error', 'Unable to fetch profile. Please log in again.');
           return;
         }
-<<<<<<< HEAD
-    
-=======
->>>>>>> 40bdcf5b8af57d852e58e1ad5eb76422f081b2d3
         const response = await axios.get(`https://smcyearbookdb-smcdbyearbook.up.railway.app/alumniprof?idNumber=${alumId}`);
         const alumData = response.data;
         
@@ -35,11 +31,7 @@ const Profile = () => {
           yearGraduated: alumData.alumni.alum_year,
           college: alumData.alumni.alum_course,
           motto: alumData.alumni.motto,
-<<<<<<< HEAD
-          image: alumData.img_url,
-=======
           image: alumData.img_url, 
->>>>>>> 40bdcf5b8af57d852e58e1ad5eb76422f081b2d3
         });
 
       } catch (error) {
@@ -79,11 +71,7 @@ const Profile = () => {
         <View style={styles.profileContainer}>
           <View style={styles.profileHeader}>
             <Image
-<<<<<<< HEAD
-              source={{ uri: profile.image || 'https://via.placeholder.com/150' }} 
-=======
               source={{ uri: profile.image || 'https://via.placeholder.com/150' }}
->>>>>>> 40bdcf5b8af57d852e58e1ad5eb76422f081b2d3
               style={styles.profileImage}
             />
           </View>

@@ -41,10 +41,6 @@ const TA = () => {
   const [statusHEData, setStatusHEData] = useState([]); 
   const [statusPCData, setStatusPCData] = useState([]); 
   const [statusSHData, setStatusSHData] = useState([]); 
-<<<<<<< HEAD
-
-//ADMINSTRATION
-=======
   const [statusRVMData, setStatusRVMData] = useState([]); 
   const [statusOHData, setStatusOHData] = useState([]); 
   const [statusNTPData, setStatusNTPData] = useState([]); 
@@ -55,7 +51,6 @@ const TA = () => {
 //////
 //////
 //////
->>>>>>> 40bdcf5b8af57d852e58e1ad5eb76422f081b2d3
 const handleStatusSelection = async (status) => {
   setIsLoading(true);
   try {
@@ -63,11 +58,7 @@ const handleStatusSelection = async (status) => {
       `https://smcyearbookdb-smcdbyearbook.up.railway.app/api/faculty-status?status=Administration`
     );
     const data = await response.json();
-<<<<<<< HEAD
-    setStatusData(data); 
-=======
     setStatusData(data);
->>>>>>> 40bdcf5b8af57d852e58e1ad5eb76422f081b2d3
   } catch (error) {
     console.error('Error fetching status data:', error);
   } finally {
@@ -83,11 +74,7 @@ const handleStatusHESelection = async (status) => {
       `https://smcyearbookdb-smcdbyearbook.up.railway.app/api/faculty-status?status=Higher Education`
     );
     const data = await response.json();
-<<<<<<< HEAD
-    setStatusHEData(data);
-=======
     setStatusHEData(data); 
->>>>>>> 40bdcf5b8af57d852e58e1ad5eb76422f081b2d3
   } catch (error) {
     console.error('Error fetching status data:', error);
   } finally {
@@ -95,9 +82,6 @@ const handleStatusHESelection = async (status) => {
   }
 };
 
-<<<<<<< HEAD
-//Program Coordinators
-=======
 
 
 //////Office Heads
@@ -155,7 +139,6 @@ const handleStatusNTPSelection = async () => {
 /////Program Coordinators
 //////
 //////
->>>>>>> 40bdcf5b8af57d852e58e1ad5eb76422f081b2d3
 const handleStatusPCSelection = async (status) => {
   setIsLoading(true);
   try {
@@ -194,17 +177,9 @@ const handleStatusSHSelection = async (status) => {
       const departmentPromises = hedDepartments.map(async (department) => {
         const response = await fetch(`https://smcyearbookdb-smcdbyearbook.up.railway.app/api/faculty-department?departmentName=${department.name}`);
         const data = await response.json();
-<<<<<<< HEAD
-        return { name: department.name, data }; 
-      });
-  
-      const departmentsData = await Promise.all(departmentPromises);
-  
-=======
         return { name: department.name, data };
       });
       const departmentsData = await Promise.all(departmentPromises);
->>>>>>> 40bdcf5b8af57d852e58e1ad5eb76422f081b2d3
       const newFacultyData = {};
       departmentsData.forEach((department) => {
         newFacultyData[department.name] = department.data;
