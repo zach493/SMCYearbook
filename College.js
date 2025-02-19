@@ -17,6 +17,19 @@ const College = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedImages, setSelectedImages] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [imageVisibility, setImageVisibility] = useState([true, true, true]);
+
+  const toggleImageVisibility = (index) => {
+    setImageVisibility(prev => {
+      const newVisibility = [...prev];
+      newVisibility[index] = !newVisibility[index]; 
+      return newVisibility;
+    });
+  };
+
+  const downloadImage = (uri) => {
+    Alert.alert('Download', `Downloading image from ${uri}`);
+  };
 
   const getTabStyle = (collegeName) => {
     switch (collegeName) {
@@ -170,6 +183,12 @@ const College = () => {
     setSelectedImages(images);
     setSelectedImage(images[0]);
     setModalVisible(true);
+    const initialVisibility = images.reduce((acc, _, index) => {
+      acc[index] = true; 
+      return acc;
+    }, {});
+    setImageVisibility(initialVisibility);
+    setImageVisibility([true, true, true]);
   };
   
   const renderContent = () => {
@@ -234,18 +253,27 @@ const College = () => {
       <Modal animationType="slide" transparent={true} visible={modalVisible}>
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
-          <TouchableOpacity onPress={() => setModalVisible(false)} style={styles.closeButton}>
-                <Text style={styles.closeButtonText}>x</Text>
-        </TouchableOpacity>
-            <Image source={{ uri: selectedImage?.uri }} style={styles.modalImage} />
-            <Text style={styles.modalTitle }>{selectedImage?.type}</Text>
-            <View style={styles.imageSelectionContainer}>
-              {selectedImages.map((img, idx) => (
-                <TouchableOpacity key={idx} onPress={() => setSelectedImage(img)}>
-                  <Image source={{ uri: img.uri }} style={styles.selectionImage} />
-                </TouchableOpacity>
-              ))}
-            </View>
+            <TouchableOpacity onPress={() => setModalVisible(false)} style ={styles.closeButton}>
+              <Text style={styles.closeButtonText}>x</Text>
+            </TouchableOpacity>
+            <ScrollView contentContainerStyle={styles.scrollViewContent}>
+            {selectedImages.map((image, index) => (
+              <View key={index} style={styles.imageContainer}>
+                {imageVisibility[index] ? (
+                  <Image source={{ uri: image.uri }} style={styles.modalImage} />
+                ) : null}
+                <View style={styles.iconContainer}>
+                  <TouchableOpacity onPress={() => toggleImageVisibility(index)}>
+                    <Image source={imageVisibility[index] ? require('./images/hide.png') : require('./images/show.png')} style={styles.icon} />
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => downloadImage(image.uri)}>
+                    <Image source={require('./images/download.png')} style={styles.icon} />
+                  </TouchableOpacity>
+                </View>
+                <Text style={styles.modalTitle}>{image.type}</Text>
+              </View>
+            ))}
+            </ScrollView>
           </View>
         </View>
       </Modal>
@@ -256,44 +284,70 @@ const College = () => {
 const styles = StyleSheet.create({
   container: { 
     flex: 1, 
-    backgroundColor: '#24348E' 
+    backgroundColor: '#24348E', 
+  },
+  imageWrapper: {
+    position: 'relative', 
+  },
+  scrollViewContent: {
+    flexGrow: 1,
+    alignItems: 'right', 
+  },
+  imageContainer: {
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  iconContainer: {
+    position: 'absolute', 
+    top: 10, 
+    right: -6, 
+    flexDirection: 'row',
+  },
+  icon: {
+    width: 15,
+    height: 15,
+    marginTop: -57,
+    marginHorizontal: 5,
   },
   modalContainer: { 
     flex: 1, 
     justifyContent: 'center', 
     alignItems: 'center', 
-    backgroundColor: 'rgba(0,0,0,0.8)' 
+    backgroundColor: 'rgba(0,0,0,0.8)', 
   },
   modalContent: { 
+    maxHeight: '80%',
     padding: 20, 
     alignItems: 'center', 
     borderRadius: 10, 
-    width: '90%' 
+    width: '90%', 
   },
   modalTitle: { 
     color: '#fff',
     fontSize: 18, 
     fontWeight: 'semibold', 
     marginBottom: 10,
-    marginTop: 10,
-    fontSize: 25,
+    marginTop: 5,
+    fontSize: 18,
     fontStyle: 'italic',
+    textAlign: 'left', 
+    width: '98%',
   },
   modalImage: { 
-    width: width * 0.8, 
+    width: width * 0.6, 
     height: height * 0.4, 
-    resizeMode: 'contain' 
+    resizeMode: 'contain', 
   },
   imageSelectionContainer: { 
     flexDirection: 'row', 
-    marginTop: 10 
+    marginTop: 10, 
   },
   selectionImage: { 
     width: 60, 
     height: 60, 
     marginHorizontal: 5, 
     borderWidth: 2, 
-    borderColor: '#24348E' 
+    borderColor: '#24348E', 
   },
 
   closeButtonText: { 
