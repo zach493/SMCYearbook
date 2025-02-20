@@ -251,32 +251,34 @@ const College = () => {
       {renderContent()}
 
       <Modal animationType="slide" transparent={true} visible={modalVisible}>
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
-            <TouchableOpacity onPress={() => setModalVisible(false)} style ={styles.closeButton}>
-              <Text style={styles.closeButtonText}>x</Text>
+    <View style={styles.modalContainer}>
+        <View style={styles.modalContent}>
+            <TouchableOpacity onPress={() => setModalVisible(false)} style={styles.closeButton}>
+                <Text style={styles.closeButtonText}>x</Text>
             </TouchableOpacity>
             <ScrollView contentContainerStyle={styles.scrollViewContent}>
-            {selectedImages.map((image, index) => (
-              <View key={index} style={styles.imageContainer}>
-                {imageVisibility[index] ? (
-                  <Image source={{ uri: image.uri }} style={styles.modalImage} />
-                ) : null}
-                <View style={styles.iconContainer}>
-                  <TouchableOpacity onPress={() => toggleImageVisibility(index)}>
-                    <Image source={imageVisibility[index] ? require('./images/hide.png') : require('./images/show.png')} style={styles.icon} />
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={() => downloadImage(image.uri)}>
-                    <Image source={require('./images/download.png')} style={styles.icon} />
-                  </TouchableOpacity>
-                </View>
-                <Text style={styles.modalTitle}>{image.type}</Text>
-              </View>
-            ))}
+                {selectedImages.map((image, index) => (
+                    <View key={index} style={styles.imageContainer}>
+                        {imageVisibility[index] ? (
+                            <Image source={{ uri: image.uri }} style={styles.modalImage} />
+                        ) : null}
+                        <View style={styles.iconAndTextContainer}>
+                            <Text style={styles.modalTitle}>{image.type}</Text>
+                            <View style={styles.iconContainer}>
+                                <TouchableOpacity onPress={() => toggleImageVisibility(index)}>
+                                    <Image source={imageVisibility[index] ? require('./images/hide.png') : require('./images/show.png')} style={styles.icon} />
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={() => downloadImage(image.uri)}>
+                                    <Image source={require('./images/download.png')} style={styles.icon} />
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    </View>
+                ))}
             </ScrollView>
-          </View>
         </View>
-      </Modal>
+    </View>
+</Modal>
     </View>
   );
 };
@@ -286,77 +288,66 @@ const styles = StyleSheet.create({
     flex: 1, 
     backgroundColor: '#24348E', 
   },
-  imageWrapper: {
-    position: 'relative', 
-  },
-  scrollViewContent: {
-    flexGrow: 1,
-    alignItems: 'right', 
-  },
-  imageContainer: {
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  iconContainer: {
-    position: 'absolute', 
-    top: 10, 
-    right: -6, 
-    flexDirection: 'row',
-  },
-  icon: {
-    width: 15,
-    height: 15,
-    marginTop: -57,
-    marginHorizontal: 5,
-  },
   modalContainer: { 
     flex: 1, 
     justifyContent: 'center', 
     alignItems: 'center', 
     backgroundColor: 'rgba(0,0,0,0.8)', 
-  },
-  modalContent: { 
+},
+modalContent: { 
     maxHeight: '80%',
     padding: 20, 
     alignItems: 'center', 
     borderRadius: 10, 
     width: '90%', 
-  },
-  modalTitle: { 
+},
+scrollViewContent: {
+    flexGrow: 1,
+    alignItems: 'center', 
+},
+imageContainer: {
+    alignItems: 'center',
+    marginBottom: 20,
+    position: 'relative', 
+},
+iconAndTextContainer: {
+    flexDirection: 'row', 
+    alignItems: 'center', 
+    marginTop: 10, 
+    justifyContent: 'space-between', 
+    width: '100%', 
+},
+iconContainer: {
+    flexDirection: 'row',
+    alignItems: 'center', 
+},
+icon: {
+    width: 15,
+    height: 15,
+    marginLeft: 10,
+    marginRight: 10, 
+},
+modalTitle: { 
     color: '#fff',
-    fontSize: 18, 
-    fontWeight: 'semibold', 
+    fontSize: 15, 
     marginBottom: 10,
     marginTop: 5,
-    fontSize: 18,
     fontStyle: 'italic',
     textAlign: 'left', 
-    width: '98%',
-  },
-  modalImage: { 
-    width: width * 0.6, 
-    height: height * 0.4, 
-    resizeMode: 'contain', 
-  },
-  imageSelectionContainer: { 
-    flexDirection: 'row', 
-    marginTop: 10, 
-  },
-  selectionImage: { 
-    width: 60, 
-    height: 60, 
-    marginHorizontal: 5, 
-    borderWidth: 2, 
-    borderColor: '#24348E', 
-  },
-
-  closeButtonText: { 
+    width: '70%', 
+},
+closeButtonText: { 
     color: '#fff', 
     fontWeight: '800', 
     marginLeft: 276,
     fontSize: 20,
     marginTop: -30,
-  },
+},
+modalImage: { 
+    width: '100%', 
+    height: 210, 
+    resizeMode: 'contain', 
+},
   header: {
     width: '100%',
     textAlign: 'center',
