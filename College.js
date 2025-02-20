@@ -177,8 +177,8 @@ const College = () => {
   const openModal = (alumni) => {
     const images = [
       { type: 'Toga', uri: alumni.img_url },
-      { type: 'SMC School Uniform', uri: alumni.img_school_uniform },
-      { type: 'Corporate Attire', uri: alumni.img_corporate_attire }
+      { type: 'SMC School Uniform', uri: alumni.img_url1 },
+      { type: 'Corporate Attire', uri: alumni.img_url2 }
     ];
     setSelectedImages(images);
     setSelectedImage(images[0]);
