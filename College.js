@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Image, Text, ScrollView, ActivityIndicator, Alert, TouchableOpacity, Dimensions, Modal, TextInput } from 'react-native';
+import { StyleSheet, View, Image, Text, ScrollView, ActivityIndicator, Alert, TouchableOpacity, Dimensions, Modal } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import axios from 'axios';
 import Header from './Header';
@@ -18,8 +18,6 @@ const College = () => {
   const [selectedImages, setSelectedImages] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageVisibility, setImageVisibility] = useState([true, true, true]);
-  const [encryptionKey, setEncryptionKey] = useState('');
-  const [showImages, setShowImages] = useState(false);
 
   const toggleImageVisibility = (index) => {
     setImageVisibility(prev => {
@@ -114,7 +112,7 @@ const College = () => {
         "BSCE": "Bachelor of Science in Civil Engineering",
         "BSCpE": "Bachelor of Science in Computer Engineering",
         "BSECE": "Bachelor of Science in Electronics Engineering",
- },
+      },
     },
     "College of Computer Studies": {
       tabs: ["BSCS", "BSIS", "BSIT"],
@@ -178,19 +176,23 @@ const College = () => {
 
   const openModal = (alumni) => {
     const images = [
-      { type: 'Toga', uri: alumni.img_url },
-      { type: 'SMC School Uniform', uri: alumni.img_url1 },
-      { type: 'Corporate Attire', uri: alumni.img_url2 }
+      { type: 'Toga', uri: alumni.img_url, status: alumni.status },
+      { type: 'SMC School Uniform', uri: alumni.img_url1, status: alumni.status_uni },
+      { type: 'Corporate Attire', uri: alumni.img_url2, status: alumni.status_corp }
     ];
-    setSelectedImages(images);
-    setSelectedImage(images[0]);
+
+    const updatedImages = images.map(image => {
+      if (image.status === 'Hidden') {
+          return { ...image, uri: 'https://res.cloudinary.com/dqkcdsuwp/image/upload/v1740552918/w4dkktznjcmsdlgxuo0f.jpg' }; 
+      }else {
+        // If the status is not 'Hidden', keep the original URI from the database
+        return { ...image }; // This will keep the original URI
+      }
+    });
+
+    setSelectedImages(updatedImages);
+    setSelectedImage(updatedImages[0]);
     setModalVisible(true);
-    const initialVisibility = images.reduce((acc, _, index) => {
-      acc[index] = true; 
-      return acc;
-    }, {});
-    setImageVisibility(initialVisibility);
-    setImageVisibility([true, true, true]);
   };
   
   const renderContent = () => {
@@ -253,39 +255,37 @@ const College = () => {
       {renderContent()}
 
       <Modal animationType="slide" transparent={true} visible={modalVisible}>
-    <View style={styles.modalContainer}>
-        <View style={styles.modalContent}>
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
             <TouchableOpacity onPress={() => setModalVisible(false)} style={styles.closeButton}>
-                <Text style={styles.closeButtonText}>x</Text>
+              <Text style={styles.closeButtonText}>x</Text>
             </TouchableOpacity>
             <ScrollView contentContainerStyle={styles.scrollViewContent}>
-                {/* Display the currently selected image and its name */}
-                {selectedImage && (
-                    <TouchableOpacity onPress={() => setSelectedImage(selectedImage)}>
-                        <Image source={{ uri: selectedImage.uri }} style={styles.modalImage} />
-                        <Text style={styles.modalTitle}>{selectedImage.type}</Text> {/* Display the name */}
-                    </TouchableOpacity>
-                )}
-                <View style={styles.thumbnailsContainer}>
-                    {selectedImages.map((image, index) => (
-                        <TouchableOpacity key={index} onPress={() => {
-                            setSelectedImage(image);
-                        }}>
-                            <Image 
-                                source={{ uri: image.uri }} 
-                                style={[
-                                    styles.thumbnailImage, 
-                                    selectedImage.uri === image.uri && styles.selectedThumbnail
-                                ]} 
-                            />
-                            
-                        </TouchableOpacity>
-                    ))}
-                </View>
+              {selectedImage && (
+                <TouchableOpacity onPress={() => setSelectedImage(selectedImage)}>
+                  <Image source={{ uri: selectedImage.uri }} style={styles.modalImage} />
+                  <Text style={styles.modalTitle}>{selectedImage.type}</Text>
+                </TouchableOpacity>
+              )}
+              <View style={styles.thumbnailsContainer}>
+                {selectedImages.map((image, index) => (
+                  <TouchableOpacity key={index} onPress={() => {
+                    setSelectedImage(image);
+                  }}>
+                    <Image 
+                      source={{ uri: image.uri }} 
+                      style={[
+                        styles.thumbnailImage, 
+                        selectedImage.uri === image.uri && styles.selectedThumbnail
+                      ]} 
+                    />
+                  </TouchableOpacity>
+                ))}
+              </View>
             </ScrollView>
+          </View>
         </View>
-    </View>
-</Modal>
+      </Modal>
     </View>
   );
 };
@@ -332,6 +332,7 @@ modalImage: {
     borderWidth: 3,
   },
 thumbnailsContainer: {
+    
     flexDirection: 'row',
     justifyContent: 'space-around',
     width: '100%',
