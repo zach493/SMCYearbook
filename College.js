@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Image, Text, ScrollView, ActivityIndicator, Alert, TouchableOpacity, Dimensions, Modal } from 'react-native';
+import { StyleSheet, View, Image, Text, ScrollView, ActivityIndicator, Alert, TouchableOpacity, Dimensions, Modal, TextInput } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import axios from 'axios';
 import Header from './Header';
@@ -18,6 +18,8 @@ const College = () => {
   const [selectedImages, setSelectedImages] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageVisibility, setImageVisibility] = useState([true, true, true]);
+  const [encryptionKey, setEncryptionKey] = useState('');
+  const [showImages, setShowImages] = useState(false);
 
   const toggleImageVisibility = (index) => {
     setImageVisibility(prev => {
@@ -257,24 +259,29 @@ const College = () => {
                 <Text style={styles.closeButtonText}>x</Text>
             </TouchableOpacity>
             <ScrollView contentContainerStyle={styles.scrollViewContent}>
-                {selectedImages.map((image, index) => (
-                    <View key={index} style={styles.imageContainer}>
-                        {imageVisibility[index] ? (
-                            <Image source={{ uri: image.uri }} style={styles.modalImage} />
-                        ) : null}
-                        <View style={styles.iconAndTextContainer}>
-                            <Text style={styles.modalTitle}>{image.type}</Text>
-                            <View style={styles.iconContainer}>
-                                <TouchableOpacity onPress={() => toggleImageVisibility(index)}>
-                                    <Image source={imageVisibility[index] ? require('./images/hide.png') : require('./images/show.png')} style={styles.icon} />
-                                </TouchableOpacity>
-                                <TouchableOpacity onPress={() => downloadImage(image.uri)}>
-                                    <Image source={require('./images/download.png')} style={styles.icon} />
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                    </View>
-                ))}
+                {/* Display the currently selected image and its name */}
+                {selectedImage && (
+                    <TouchableOpacity onPress={() => setSelectedImage(selectedImage)}>
+                        <Image source={{ uri: selectedImage.uri }} style={styles.modalImage} />
+                        <Text style={styles.modalTitle}>{selectedImage.type}</Text> {/* Display the name */}
+                    </TouchableOpacity>
+                )}
+                <View style={styles.thumbnailsContainer}>
+                    {selectedImages.map((image, index) => (
+                        <TouchableOpacity key={index} onPress={() => {
+                            setSelectedImage(image);
+                        }}>
+                            <Image 
+                                source={{ uri: image.uri }} 
+                                style={[
+                                    styles.thumbnailImage, 
+                                    selectedImage.uri === image.uri && styles.selectedThumbnail
+                                ]} 
+                            />
+                            
+                        </TouchableOpacity>
+                    ))}
+                </View>
             </ScrollView>
         </View>
     </View>
@@ -288,65 +295,70 @@ const styles = StyleSheet.create({
     flex: 1, 
     backgroundColor: '#24348E', 
   },
-  modalContainer: { 
-    flex: 1, 
-    justifyContent: 'center', 
-    alignItems: 'center', 
-    backgroundColor: 'rgba(0,0,0,0.8)', 
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.8)',
 },
-modalContent: { 
+modalContent: {
     maxHeight: '80%',
-    padding: 20, 
-    alignItems: 'center', 
-    borderRadius: 10, 
-    width: '90%', 
+    padding: 20,
+    alignItems: 'center',
+    borderRadius: 10,
+    width: '90%',
+},
+closeButton: {
+    alignSelf: 'flex-end',
+},
+closeButtonText: {
+    color: '#fff',
+    fontSize: 20,
+    fontWeight: '600',
 },
 scrollViewContent: {
     flexGrow: 1,
-    alignItems: 'center', 
-},
-imageContainer: {
     alignItems: 'center',
-    marginBottom: 20,
-    position: 'relative', 
 },
-iconAndTextContainer: {
-    flexDirection: 'row', 
-    alignItems: 'center', 
-    marginTop: 10, 
-    justifyContent: 'space-between', 
-    width: '100%', 
-},
-iconContainer: {
-    flexDirection: 'row',
-    alignItems: 'center', 
-},
-icon: {
-    width: 15,
-    height: 15,
-    marginLeft: 10,
-    marginRight: 10, 
-},
-modalTitle: { 
-    color: '#fff',
-    fontSize: 15, 
+modalImage: {
+  marginTop: 50,
+    width: '100%',
+    height: 300,
+    resizeMode: 'contain',
     marginBottom: 10,
-    marginTop: 5,
+    borderColor: '#1C2768',
+    width: 200,
+    height: 270,
+    borderWidth: 3,
+  },
+thumbnailsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    width: '100%',
+},
+thumbnailImage: {
+    width: 80,
+    height: 80,
+    borderWidth: 2,
+    borderColor: 'transparent',
+    margin: 5,
+},
+selectedThumbnail: {
+    borderColor: '#329AFE', 
+},
+modalTitle: {
+    color: '#fff',
+    fontSize: 18,
+    textAlign: 'center',
+    marginVertical: 5,
     fontStyle: 'italic',
-    textAlign: 'left', 
-    width: '70%', 
+
 },
-closeButtonText: { 
-    color: '#fff', 
-    fontWeight: '800', 
-    marginLeft: 276,
-    fontSize: 20,
-    marginTop: -30,
-},
-modalImage: { 
-    width: '100%', 
-    height: 210, 
-    resizeMode: 'contain', 
+thumbnailTitle: {
+    color: '#fff',
+    fontSize: 12,
+    textAlign: 'center',
+    fontStyle: 'italic',
 },
   header: {
     width: '100%',
