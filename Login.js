@@ -25,12 +25,20 @@ const Login = ({ navigation }) => {
         await login(user, token); 
         navigation.navigate('Panel'); 
       } else {
-        Alert.alert('Error', message);
+        Alert.alert('Error', message || 'Login failed');
       }
     } catch (error) {
-      console.error('Login failed:', error);
-      const errorMessage = error.response?.data?.message || 'Failed to log in. Please try again later';
-      Alert.alert('Error', errorMessage);
+      // Handle error responses from the server
+      if (error.response) {
+        // The server responded with a status code outside of 2xx
+        Alert.alert('Error', error.response.data.message || 'Invalid credentials');
+      } else if (error.request) {
+        // The request was made but no response was received
+        Alert.alert('Error', 'Network error. Please check your internet connection.');
+      } else {
+        // Something happened in setting up the request
+        Alert.alert('Error', 'An unexpected error occurred. Please try again.');
+      }
     }
   };
 
