@@ -11,13 +11,13 @@ const Login = ({ navigation }) => {
   const [password, setPassword] = useState('');
 
   const handleLogin = async () => {
-    if (!idNumber) {
-      Alert.alert('Error', 'ID Number is required');
+    if (!idNumber || !password) {
+      Alert.alert('Error', 'Both ID Number and password are required');
       return;
     }
 
     try {
-      const response = await axios.get(`https://smcyearbookdb-smcdbyearbook.up.railway.app/login?idNumber=${idNumber}`);
+      const response = await axios.get(`https://smcyearbookdb-smcdbyearbook.up.railway.app/login?idNumber=${idNumber}&password=${password}`);
       const { message, user } = response.data;
 
       if (message === 'Login successful') {
@@ -25,11 +25,12 @@ const Login = ({ navigation }) => {
         await login(user, token); 
         navigation.navigate('Panel'); 
       } else {
-        Alert.alert('Error', 'Invalid ID Number');
+        Alert.alert('Error', message);
       }
     } catch (error) {
       console.error('Login failed:', error);
-      Alert.alert('Error', 'Failed to log in. Please try again later');
+      const errorMessage = error.response?.data?.message || 'Failed to log in. Please try again later';
+      Alert.alert('Error', errorMessage);
     }
   };
 
