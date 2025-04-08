@@ -43,10 +43,6 @@ const Header = () => {
           source={require('./images/my.SMC_border.png')}
           style={styles.logo}
         />
-        <Image
-          source={require('./images/search.png')}
-          style={styles.icon}
-        />
       </View>
 
       <View style={styles.subHeader}>

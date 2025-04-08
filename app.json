@@ -2,6 +2,7 @@
   "expo": {
     "name": "SMCYearbook",
     "slug": "SMCYearbook",
+    "icon": "./images/smctemplate.jpg",
     "version": "1.0.0",
     "extra": {
       "eas": {
